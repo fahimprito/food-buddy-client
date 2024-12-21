@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className="font-montserrat">
             <Navbar></Navbar>
             <Outlet></Outlet>
         </div>

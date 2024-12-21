@@ -13,17 +13,41 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/"
-                    className={({ isActive }) => (isActive ? "font-semibold text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
                 >
                     Home
                 </NavLink>
             </li>
             <li>
                 <NavLink
-                    to="/available-foods"
-                    className={({ isActive }) => (isActive ? "font-semibold text-orange-300" : "text-white")}
+                    to="/availablefoods"
+                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
                 >
                     Available Foods
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/addfood"
+                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                >
+                    Add Food
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/managefood"
+                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                >
+                    Manage My Foods
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/foodrequest"
+                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                >
+                    My Food Request
                 </NavLink>
             </li>
             <li>
@@ -63,7 +87,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Desktop Links */}
-                <ul className="hidden md:flex space-x-6 text-lg items-center">
+                <ul className="hidden md:flex space-x-6 text-base items-center font-medium">
                     {navLinks}
                 </ul>
             </div>
