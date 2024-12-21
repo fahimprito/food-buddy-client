@@ -11,6 +11,7 @@ export default {
       fontFamily: {
         montserrat: "Montserrat, sans-serif",
         raleway: "Raleway, sans-serif",
+        birthstone: "Birthstone, serif",
       }
     },
   },

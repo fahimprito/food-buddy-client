@@ -13,7 +13,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/"
-                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     Home
                 </NavLink>
@@ -21,7 +21,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/availablefoods"
-                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     Available Foods
                 </NavLink>
@@ -29,7 +29,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/addfood"
-                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     Add Food
                 </NavLink>
@@ -37,7 +37,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/managefood"
-                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     Manage My Foods
                 </NavLink>
@@ -45,7 +45,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/foodrequest"
-                    className={({ isActive }) => (isActive ? " text-orange-300" : "text-white")}
+                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     My Food Request
                 </NavLink>
@@ -68,19 +68,19 @@ const Navbar = () => {
     );
 
     return (
-        <nav className=" px-4 py-3 shadow-lg">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <nav className=" px-4 py-3 shadow-md">
+            <div className="container mx-auto flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-2">
                     <img className="w-10 sm:w-16" src={logo} alt="" />
-                    <p className="text-2xl sm:text-4xl font-bold text-orange-300">
-                        Food<span className="font-medium text-white">Buddy</span>
+                    <p className="text-5xl sm:text-6xl font-bold text-orange-400 font-birthstone">
+                        Food<span className="font-medium ">Buddy</span>
                     </p>
                 </Link>
 
                 {/* Menubar */}
                 <button
-                    className="text-white md:hidden"
+                    className=" md:hidden"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
