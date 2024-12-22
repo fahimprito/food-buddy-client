@@ -1,16 +1,63 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signupAnimation from "../assets/lottie/loginLotti.json"
 import Lottie from "lottie-react";
+import AuthContext from "../contexts/AuthContext";
 
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignup = e => {
         e.preventDefault();
+        // get form data 
+        const form = e.target;
+        const name = form.name.value;
+        const photo = form.photo.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log({ name, photo, email, password });
+
+        setError('')
+        // console.log(error);
+
+        //passwordvalidate
+        const errorMessage = [];
+        if (!/[A-Z]/.test(password)) {
+            errorMessage.push("contain at least one uppercase letter");
+        }
+        if (!/[a-z]/.test(password)) {
+            errorMessage.push("contain at least one lowercase letter");
+        }
+        if (password.length < 6) {
+            errorMessage.push("be at least 6 characters long");
+        }
+        // Set error or clear it
+        if (errorMessage.length > 0) {
+            setError(`Password must ${errorMessage.join(", ")}.`);
+            return;
+        }
+
+        // create user
+        createUser(email, password)
+            .then(() => {
+                e.target.reset();
+                updateUserProfile({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        navigate('/');
+                    })
+                    .catch((err) => {
+                        setError(err.message);
+                    });
+            })
+            .catch(err => {
+                setError(err.message);
+            })
     }
 
     return (
@@ -59,11 +106,11 @@ const Signup = () => {
                             </button>
                         </div>
 
-                        {/* {error && (
-                        <label className="label text-sm text-red-600">
-                            {error}
-                        </label>
-                    )} */}
+                        {error && (
+                            <label className="label text-sm text-red-600">
+                                {error}
+                            </label>
+                        )}
 
                         <div className="form-control mt-8">
                             <button className="btn bg-orange-400 hover:bg-orange-500 text-white text-lg rounded-md">

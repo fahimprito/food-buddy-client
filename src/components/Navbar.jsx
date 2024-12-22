@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion } from "motion/react"
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.png"
+import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useContext(AuthContext);
 
     // Navbar links
     const navLinks = (
@@ -50,20 +52,40 @@ const Navbar = () => {
                     My Food Request
                 </NavLink>
             </li>
-            <li>
-                <Link
-                    to="/login"
-                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
-                    Login
-                </Link>
-            </li>
-            <li>
-                <Link
-                    to="/signup"
-                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
-                    Signup
-                </Link>
-            </li>
+            {
+                user ? (
+                    <>
+                        <li className="hidden md:flex">
+                            {user?.displayName}
+
+                        </li>
+                        <li>
+                            <button
+                                // to="/login"
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                Logout
+                            </button>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <Link
+                                to="/login"
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                Login
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/signup"
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                Signup
+                            </Link>
+                        </li>
+                    </>
+                )
+            }
         </>
     );
 
@@ -78,13 +100,17 @@ const Navbar = () => {
                     </p>
                 </Link>
 
-                {/* Menubar */}
-                <button
-                    className=" md:hidden"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-                </button>
+                <div className="md:hidden flex items-center gap-4">
+                    {user?.displayName}
+                    {/* Menubar */}
+                    <button
+                        // className=" md:hidden"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                    </button>
+                </div>
+
 
                 {/* Desktop Links */}
                 <ul className="hidden md:flex space-x-6 text-lg items-center font-medium">
