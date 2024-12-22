@@ -9,7 +9,7 @@ import AuthContext from "../contexts/AuthContext";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState({});
     const location = useLocation();
@@ -28,6 +28,16 @@ const Login = () => {
             })
             .catch(err => {
                 setError({ ...error, login: err.message });
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        loginWithGoogle()
+            .then(() => {
+                navigate(location.state ? location.state : '/');
+            })
+            .catch(error => {
+                setError(error.message)
             })
     }
 
@@ -98,7 +108,7 @@ const Login = () => {
                     </Link></p>
                     <div className="divider">OR</div>
                     <button
-                        // onClick={handleGoogleSignIn}
+                        onClick={handleGoogleSignIn}
                         className="btn btn-outline w-full text-blue-500 hover:bg-sky-900 font-semibold text-lg rounded-full">
                         <span className="text-2xl">
                             <FcGoogle></FcGoogle>
