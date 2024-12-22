@@ -55,8 +55,18 @@ const Navbar = () => {
             {
                 user ? (
                     <>
-                        <li className="hidden md:flex">
-                            {user?.displayName}
+                        <li className="hidden lg:flex">
+                            {
+                                user && <div className="relative group">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar border mt-1">
+                                        <img src={user.photoURL} alt="User Icon" className="rounded-full" />
+                                    </label>
+                                    <span
+                                        className="absolute top-14 right-0 bg-white text-black px-3 py-1 rounded shadow-md text-sm hidden group-hover:block whitespace-nowrap z-10">
+                                        {user.displayName}
+                                    </span>
+                                </div>
+                            }
 
                         </li>
                         <li>
@@ -100,8 +110,20 @@ const Navbar = () => {
                     </p>
                 </Link>
 
-                <div className="md:hidden flex items-center gap-4">
-                    {user?.displayName}
+                <div className="lg:hidden flex items-center gap-4">
+                    {/* user icon  */}
+                    {
+                        user && <div className="relative group">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar border mt-1">
+                                <img src={user.photoURL} alt="User Icon" className="rounded-full" />
+                            </label>
+                            <span
+                                className="absolute top-14 right-0 bg-white text-black px-3 py-1 rounded shadow-md text-sm hidden group-hover:block whitespace-nowrap z-10">
+                                {user.displayName}
+                            </span>
+                        </div>
+                    }
+
                     {/* Menubar */}
                     <button
                         // className=" md:hidden"
@@ -113,7 +135,7 @@ const Navbar = () => {
 
 
                 {/* Desktop Links */}
-                <ul className="hidden md:flex space-x-6 text-lg items-center font-medium">
+                <ul className="hidden lg:flex space-x-6 text-lg items-center font-medium">
                     {navLinks}
                 </ul>
             </div>
@@ -123,7 +145,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`mobile-menu md:hidden overflow-hidden px-2`}
+                className={`mobile-menu lg:hidden overflow-hidden px-4 pb-3`}
             >
                 <ul
                     className="space-y-2 mt-3"

@@ -1,16 +1,34 @@
 import Lottie from "lottie-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginAnimation from "../assets/lottie/loginLottie.json"
+import AuthContext from "../contexts/AuthContext";
 
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [error, setError] = useState({});
+    const location = useLocation();
 
     const handleLogin = e => {
         e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log({ email, password });
+
+        loginUser(email, password)
+            .then(() => {
+                e.target.reset();
+                navigate(location.state ? location.state : '/');
+            })
+            .catch(err => {
+                setError({ ...error, login: err.message });
+            })
     }
 
     return (
@@ -60,11 +78,11 @@ const Login = () => {
                                 Forgot password?</Link>
                         </label>
 
-                        {/* {error && (
-                        <label className="label text-sm text-red-600">
-                            {error}
-                        </label>
-                    )} */}
+                        {error && (
+                            <label className="label text-sm text-red-600">
+                                {error.login}
+                            </label>
+                        )}
 
                         <div className="form-control mt-8">
                             <button className="btn bg-orange-400 hover:bg-orange-500 text-white text-lg rounded-md">
