@@ -7,7 +7,7 @@ import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user, logOutUser } = useContext(AuthContext);
 
     // Navbar links
     const navLinks = (
@@ -71,7 +71,7 @@ const Navbar = () => {
                         </li>
                         <li>
                             <button
-                                // to="/login"
+                                onClick={logOutUser}
                                 className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
                                 Logout
                             </button>
