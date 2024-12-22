@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import signupAnimation from "../assets/lottie/loginLotti.json"
 import Lottie from "lottie-react";
 import AuthContext from "../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 
 const Signup = () => {
@@ -54,6 +55,13 @@ const Signup = () => {
                     .catch((err) => {
                         setError(err.message);
                     });
+                    
+                Swal.fire({
+                    icon: "success",
+                    title: "Registered Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
             .catch(err => {
                 setError(err.message);
@@ -63,6 +71,12 @@ const Signup = () => {
     const handleGoogleSignIn = () => {
         loginWithGoogle()
             .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Registered Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 navigate('/');
             })
             .catch(error => {
