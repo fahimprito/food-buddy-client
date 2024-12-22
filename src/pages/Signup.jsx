@@ -1,33 +1,40 @@
-import Lottie from "lottie-react";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import loginAnimation from "../assets/lottie/loginLottie.json"
+import signupAnimation from "../assets/lottie/loginLotti.json"
+import Lottie from "lottie-react";
 
 
-const Login = () => {
+const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleLogin = e => {
+    const handleSignup = e => {
         e.preventDefault();
     }
 
     return (
         <div className="max-w-7xl mx-auto my-10 grid md:grid-cols-2">
 
-            <div className="max-md:hidden">
-                <div className="mx-auto w-2/3 mt-10">
-                    <Lottie animationData={loginAnimation} loop={true} />
-                </div>
-            </div>
-
             <div className="max-md:px-4">
-                <div className="md:w-2/3 md:mx-auto px-6 border rounded-xl py-8">
-                    <h2 className="text-3xl font-semibold mb-4 text-center">Login</h2>
+                <div className="md:w-5/6 md:mx-auto px-6 border rounded-xl py-8">
+                    <h2 className="text-3xl font-semibold mb-4 text-center">Sign up</h2>
                     <div className="divider"></div>
 
-                    <form onSubmit={handleLogin}>
+                    <form onSubmit={handleSignup}>
+                        <div className="form-control mt-4">
+                            <label className="label">
+                                <span className="label-text font-semibold text-lg">Your Name</span>
+                            </label>
+                            <input type="text" name="name" placeholder="Enter your name" className="input rounded-md bg-base-200" required />
+
+                        </div>
+                        <div className="form-control mt-4">
+                            <label className="label">
+                                <span className="label-text font-semibold text-lg">Photo URL</span>
+                            </label>
+                            <input type="text" name="photo" placeholder="Photo URL" className="input rounded-md bg-base-200" required />
+                        </div>
                         <div className="form-control mt-4">
                             <label className="label">
                                 <span className="label-text font-semibold text-lg">Email address</span>
@@ -52,14 +59,6 @@ const Login = () => {
                             </button>
                         </div>
 
-                        <label
-                            className="label mt-1">
-                            <Link
-                                // to={"/resetpassword"}
-                                className="text-gray-600 text-sm font-medium link-hover">
-                                Forgot password?</Link>
-                        </label>
-
                         {/* {error && (
                         <label className="label text-sm text-red-600">
                             {error}
@@ -68,15 +67,15 @@ const Login = () => {
 
                         <div className="form-control mt-8">
                             <button className="btn bg-orange-400 hover:bg-orange-500 text-white text-lg rounded-md">
-                                Login
+                                Register
                             </button>
                         </div>
 
                     </form>
 
-                    <p className="text-center mt-4">Do not have an account? <Link
-                        className="text-orange-500 font-semibold link-hover" to="/signup">
-                        Create an account
+                    <p className="text-center mt-4">Already have an account? <Link
+                        className="text-orange-500 font-semibold link-hover" to="/login">
+                        Login
                     </Link></p>
                     <div className="divider">OR</div>
                     <button
@@ -90,9 +89,13 @@ const Login = () => {
 
                 </div>
             </div>
-
+            <div className="max-md:hidden">
+                <div className="">
+                    <Lottie animationData={signupAnimation} loop={true} />
+                </div>
+            </div>
         </div>
     );
 };
 
-export default Login;
+export default Signup;
