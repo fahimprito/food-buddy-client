@@ -69,10 +69,10 @@ const Navbar = () => {
 
     return (
         <nav className=" px-4 py-3 shadow-md">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container mx-auto px-4 flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-2">
-                    <img className="w-10 sm:w-16" src={logo} alt="" />
+                    <img className="w-10 sm:w-16" src={logo} alt="FoodBuddy Logo" />
                     <p className="text-5xl sm:text-6xl font-bold text-orange-400 font-birthstone">
                         Food<span className="font-medium ">Buddy</span>
                     </p>
@@ -97,9 +97,14 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`mobile-menu md:hidden overflow-hidden`}
+                className={`mobile-menu md:hidden overflow-hidden px-2`}
             >
-                <ul className="space-y-2 mt-3">{navLinks}</ul>
+                <ul
+                    className="space-y-2 mt-3"
+                    onClick={() => setIsOpen(false)}
+                >
+                    {navLinks}
+                </ul>
             </motion.div>
         </nav>
     );
