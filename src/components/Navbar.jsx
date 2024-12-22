@@ -53,14 +53,14 @@ const Navbar = () => {
             <li>
                 <Link
                     to="/login"
-                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-base px-5">
+                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
                     Login
                 </Link>
             </li>
             <li>
                 <Link
                     to="/signup"
-                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-base px-5">
+                    className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
                     Signup
                 </Link>
             </li>
@@ -87,7 +87,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Desktop Links */}
-                <ul className="hidden md:flex space-x-6 text-base items-center font-medium">
+                <ul className="hidden md:flex space-x-6 text-lg items-center font-medium">
                     {navLinks}
                 </ul>
             </div>

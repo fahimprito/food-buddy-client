@@ -10,8 +10,8 @@ export default {
     extend: {
       fontFamily: {
         montserrat: "Montserrat, sans-serif",
-        raleway: "Raleway, sans-serif",
         birthstone: "Birthstone, serif",
+        nunito: "Nunito, serif",
       }
     },
   },
