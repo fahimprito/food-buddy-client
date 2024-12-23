@@ -8,6 +8,7 @@ import ManageFoods from "../pages/ManageFoods";
 import FoodRequest from "../pages/FoodRequest";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -25,15 +26,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/addfood",
-                element: <AddFood></AddFood>,
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>,
             },
             {
                 path: "/managefood",
-                element: <ManageFoods></ManageFoods>,
+                element: <PrivateRoute><ManageFoods></ManageFoods></PrivateRoute>,
             },
             {
                 path: "/foodrequest",
-                element: <FoodRequest></FoodRequest>,
+                element: <PrivateRoute><FoodRequest></FoodRequest></PrivateRoute>,
             },
             {
                 path: "/login",

@@ -145,7 +145,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`mobile-menu lg:hidden overflow-hidden px-4 pb-3`}
+                className={`mobile-menu lg:hidden overflow-hidden px-4 pb-1`}
             >
                 <ul
                     className="space-y-2 mt-3"

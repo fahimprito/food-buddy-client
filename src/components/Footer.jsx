@@ -5,7 +5,7 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
     return (
-        <div>
+        <div className="mt-10 border-t">
             <footer className="py-12 px-10">
                 <div className="container mx-auto footer lg:grid-cols-3 text-lg">
                     <nav className="w-full">

@@ -55,7 +55,7 @@ const Signup = () => {
                     .catch((err) => {
                         setError(err.message);
                     });
-                    
+
                 Swal.fire({
                     icon: "success",
                     title: "Registered Successfully",
@@ -85,7 +85,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-10 grid md:grid-cols-2">
+        <div className="max-w-7xl mx-auto my-20 grid md:grid-cols-2">
 
             <div className="max-md:px-4">
                 <div className="md:w-5/6 md:mx-auto px-6 border rounded-xl py-8">

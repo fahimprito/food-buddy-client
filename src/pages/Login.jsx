@@ -11,7 +11,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { loginUser, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [error, setError] = useState({});
+    const [error, setError] = useState('');
     const location = useLocation();
 
     const handleLogin = e => {
@@ -27,7 +27,7 @@ const Login = () => {
                 navigate(location.state ? location.state : '/');
             })
             .catch(err => {
-                setError({ ...error, login: err.message });
+                setError(err.message);
             })
     }
 
@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-10 grid md:grid-cols-2">
+        <div className="max-w-7xl mx-auto my-20 grid md:grid-cols-2">
 
             <div className="max-md:hidden">
                 <div className="mx-auto w-2/3 mt-10">
@@ -90,11 +90,11 @@ const Login = () => {
 
                         {error && (
                             <label className="label text-sm text-red-600">
-                                {error.login}
+                                {error}
                             </label>
                         )}
 
-                        <div className="form-control mt-8">
+                        <div className="form-control mt-4">
                             <button className="btn bg-orange-400 hover:bg-orange-500 text-white text-lg rounded-md">
                                 Login
                             </button>
