@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import addfoodbg from "../assets/addfoodbg.jpg"
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddFood = () => {
     const { user } = useContext(AuthContext);
@@ -13,6 +15,7 @@ const AddFood = () => {
         notes: "",
         status: "available",
     });
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,8 +31,30 @@ const AddFood = () => {
             image: user?.photoURL,
         }
         const newFood = { ...formData, donator };
+        // console.log(newFood);
 
-        console.log(newFood);
+        fetch('http://localhost:5000/foods', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newFood)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Food Has been added.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/availablefoods')
+                }
+
+            })
 
 
     };
