@@ -5,8 +5,8 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
     return (
-        <div className="mt-10 border-t">
-            <footer className="py-12 px-10">
+        <div className="border-t">
+            <footer className="pt-12 pb-9 px-10">
                 <div className="container mx-auto footer lg:grid-cols-3 text-lg">
                     <nav className="w-full">
                         <Link className="flex gap-2">
