@@ -52,23 +52,35 @@ const FoodDetails = () => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    document.getElementById("request_modal").close()
+                    document.getElementById("request_modal").close();
 
-                    //remove the food from available foods
+                    // Update the food status to "requested"
                     fetch(`http://localhost:5000/foods/${_id}`, {
-                        method: "DELETE",
-                    });
-                    navigate(location.state || "/availablefoods");
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ status: "requested" }),
+                    })
+                        .then((res) => res.json())
+                        .then((updateData) => {
+                            if (updateData.modifiedCount > 0) {
+                                navigate(location.state || "/availablefoods");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error updating status:", error);
+                        });
                 }
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 Swal.fire({
                     icon: "error",
                     title: "Request Failed",
                     text: error.message,
                 });
             });
-
-    }
+    };
 
     return (
         <div className="container mx-auto space-y-4 m-10 mb-20 px-4">
