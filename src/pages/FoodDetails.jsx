@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link, useLoaderData } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 
 const FoodDetails = () => {
@@ -16,10 +17,45 @@ const FoodDetails = () => {
 
     const handleRequest = (e) => {
         e.preventDefault();
-        console.log("Request modal");
+
+        const requestData = {
+            foodId: _id,
+            foodName: foodName,
+            foodImage: foodImage,
+            donatorEmail: donator.email,
+            donatorName: donator.name,
+            userEmail: user.email,
+            requestDate: new Date().toISOString(),
+            pickupLocation: pickupLocation,
+            expiredDate: expiredDate,
+            notes: e.target.notes.value,
+        };
+
+        // console.log(requestData);
+
+        fetch("http://localhost:5000/requests", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Food Request Submitted!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    document.getElementById("purchase_modal").close()
+                    
+                }
+            });
 
         
-        document.getElementById("purchase_modal").close()
     }
 
     return (
