@@ -1,10 +1,26 @@
+import { useContext } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link, useLoaderData } from "react-router-dom";
+import AuthContext from "../contexts/AuthContext";
 
 
 const FoodDetails = () => {
     const food = useLoaderData();
+    const { user } = useContext(AuthContext);
+
     const { _id, foodImage, foodName, foodQuantity, expiredDate, pickupLocation, status, notes, donator } = food;
+
+    const handleOpenModal = () => {
+        document.getElementById('purchase_modal').showModal();
+    }
+
+    const handleRequest = (e) => {
+        e.preventDefault();
+        console.log("Request modal");
+
+        
+        document.getElementById("purchase_modal").close()
+    }
 
     return (
         <div className="container mx-auto space-y-4 m-10 mb-20 px-4">
@@ -65,7 +81,7 @@ const FoodDetails = () => {
 
                     <div className="flex mt-2">
                         <button
-
+                            onClick={handleOpenModal}
                             className="btn bg-orange-400 hover:bg-orange-500 text-white text-lg font-semibold px-6 rounded-lg">
                             Request
                         </button>
@@ -74,6 +90,131 @@ const FoodDetails = () => {
 
             </div>
 
+
+            {/* modal */}
+            <div>
+                <dialog id="purchase_modal" className="modal sm:modal-middle">
+                    <div className="modal-box flex flex-col items-center">
+                        <button
+                            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 text-xl text-red-900"
+                            onClick={() => document.getElementById("purchase_modal").close()}
+                        >
+                            ✕
+                        </button>
+                        <h3 className="text-2xl text-center font-bold mb-4">Request Food</h3>
+                        <form onSubmit={handleRequest} className="w-full max-w-md">
+                            {/* Food ID */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Food ID</label>
+                                <input
+                                    type="text"
+                                    value={_id || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Food Name */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Food Name</label>
+                                <input
+                                    type="text"
+                                    value={foodName || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Food Image */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Food Image</label>
+                                <input
+                                    type="text"
+                                    value={foodImage || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Expire Date */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Expire Date</label>
+                                <input
+                                    type="text"
+                                    value={new Date(expiredDate).toLocaleDateString("en-GB") || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Pickup Location */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Pickup Location</label>
+                                <input
+                                    type="text"
+                                    value={pickupLocation || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Donator Email */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Donator Email</label>
+                                <input
+                                    type="text"
+                                    value={donator?.email || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Donator Name */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Donator Name</label>
+                                <input
+                                    type="text"
+                                    value={donator?.name || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* User Email */}
+                            <div className="mb-4">
+                                <label className="label font-medium">User Email</label>
+                                <input
+                                    type="text"
+                                    value={user?.email || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            {/* Request Date */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Request Date</label>
+                                <input
+                                    type="text"
+                                    value={new Date().toLocaleString() || ""}
+                                    disabled
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+
+                            {/* Additional Notes */}
+                            <div className="mb-4">
+                                <label className="label font-medium">Additional Notes</label>
+                                <textarea
+                                    name="notes"
+                                    rows="3"
+                                    className="textarea textarea-bordered w-full text-lg"
+                                    placeholder="Enter any additional notes..."
+                                ></textarea>
+                            </div>
+                            {/* Submit Button */}
+                            <button
+                                type="submit"
+                                className="btn bg-orange-400 text-white text-lg hover:bg-orange-500 w-full"
+                            >
+                                Request Food
+                            </button>
+                        </form>
+                    </div>
+                </dialog>
+            </div>
 
 
         </div>
