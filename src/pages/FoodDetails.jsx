@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import Swal from "sweetalert2";
 
@@ -8,11 +8,12 @@ import Swal from "sweetalert2";
 const FoodDetails = () => {
     const food = useLoaderData();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const { _id, foodImage, foodName, foodQuantity, expiredDate, pickupLocation, status, notes, donator } = food;
 
     const handleOpenModal = () => {
-        document.getElementById('purchase_modal').showModal();
+        document.getElementById('request_modal').showModal();
     }
 
     const handleRequest = (e) => {
@@ -22,9 +23,9 @@ const FoodDetails = () => {
             foodId: _id,
             foodName: foodName,
             foodImage: foodImage,
-            donatorEmail: donator.email,
-            donatorName: donator.name,
-            userEmail: user.email,
+            donatorEmail: donator?.email,
+            donatorName: donator?.name,
+            userEmail: user?.email,
             requestDate: new Date().toISOString(),
             pickupLocation: pickupLocation,
             expiredDate: expiredDate,
@@ -50,12 +51,22 @@ const FoodDetails = () => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    document.getElementById("purchase_modal").close()
-                    
+                    document.getElementById("request_modal").close()
+
+                    //remove the food from available foods
+                    fetch(`http://localhost:5000/foods/${_id}`, {
+                        method: "DELETE",
+                    });
+                    navigate(location.state || "/availablefoods");
                 }
+            }).catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Request Failed",
+                    text: error.message,
+                });
             });
 
-        
     }
 
     return (
@@ -129,11 +140,11 @@ const FoodDetails = () => {
 
             {/* modal */}
             <div>
-                <dialog id="purchase_modal" className="modal sm:modal-middle">
+                <dialog id="request_modal" className="modal sm:modal-middle">
                     <div className="modal-box flex flex-col items-center">
                         <button
                             className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 text-xl text-red-900"
-                            onClick={() => document.getElementById("purchase_modal").close()}
+                            onClick={() => document.getElementById("request_modal").close()}
                         >
                             ✕
                         </button>
@@ -236,6 +247,7 @@ const FoodDetails = () => {
                                 <textarea
                                     name="notes"
                                     rows="3"
+                                    required
                                     className="textarea textarea-bordered w-full text-lg"
                                     placeholder="Enter any additional notes..."
                                 ></textarea>
