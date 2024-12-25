@@ -30,6 +30,7 @@ const FoodDetails = () => {
             pickupLocation: pickupLocation,
             expiredDate: expiredDate,
             notes: e.target.notes.value,
+            status: "requested",
         };
 
         // console.log(requestData);

@@ -46,7 +46,7 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/foodrequest"
+                    to="/myfoodrequest"
                     className={({ isActive }) => (isActive ? " text-orange-400" : "")}
                 >
                     My Food Request
