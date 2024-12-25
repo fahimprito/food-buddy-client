@@ -23,6 +23,7 @@ const MyFoodRequests = () => {
                         <table className="table-auto w-full border-collapse border border-gray-300">
                             <thead>
                                 <tr className="bg-orange-100 text-left">
+                                    <th className="px-4 py-2 border border-gray-300">#</th>
                                     <th className="px-4 py-2 border border-gray-300">Food Name</th>
                                     <th className="px-4 py-2 border border-gray-300">Donor Name</th>
                                     <th className="px-4 py-2 border border-gray-300">Pickup Location</th>
@@ -32,8 +33,9 @@ const MyFoodRequests = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {requests.map((request) => (
+                                {requests.map((request, index) => (
                                     <tr key={request._id} className="hover:bg-gray-100">
+                                        <td className="px-4 py-2 border border-gray-300">{index + 1}</td>
                                         <td className="px-4 py-2 border border-gray-300">{request.foodName || "N/A"}</td>
                                         <td className="px-4 py-2 border border-gray-300">{request.donatorName || "N/A"}</td>
                                         <td className="px-4 py-2 border border-gray-300">{request.pickupLocation || "N/A"}</td>
@@ -61,7 +63,7 @@ const MyFoodRequests = () => {
                     <p className="text-center text-gray-500">No food requests found.</p>
                 )
             }
-            
+
         </div>
     );
 };
