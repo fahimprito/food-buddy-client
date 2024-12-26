@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
 import FeaturedFoods from "../components/FeaturedFoods";
+import WhyChooseUs from "../components/WhyChooseUs";
 
 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <FeaturedFoods></FeaturedFoods>
-            Home
+            <WhyChooseUs></WhyChooseUs>
         </div>
     );
 };
