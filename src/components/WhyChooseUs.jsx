@@ -25,9 +25,9 @@ const WhyChooseUs = () => {
     ];
 
     return (
-        <section className="bg-gradient-to-t from-gray-100 via-gray-200 to-white ...  pt-16 pb-24">
+        <section className="bg-gradient-to-t from-gray-100 ...  py-16">
             <div className="container mx-auto text-center px-6">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Why Choose Us?</h2>
+                <h2 className="text-4xl font-bold text-gray-800 mb-6">Why Choose Us?</h2>
                 <p className="text-gray-600 mb-12">
                     Together, we can fight hunger, reduce waste, and make a meaningful impact in our communities.
                 </p>
