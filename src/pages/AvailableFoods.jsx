@@ -6,6 +6,7 @@ const AvailableFoods = () => {
     const [sortOrder, setSortOrder] = useState("");
     const [filteredFoods, setFilteredFoods] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isThreeColumnLayout, setIsThreeColumnLayout] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:5000/foods?sortOrder=${sortOrder}`)
@@ -31,11 +32,24 @@ const AvailableFoods = () => {
         setFilteredFoods(filtered);
     };
 
+    const toggleLayout = () => {
+        setIsThreeColumnLayout(!isThreeColumnLayout);
+    };
+
     return (
         <div className="container mx-auto mt-10 mb-20 px-4">
             {/* controls section */}
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                <h2 className="text-3xl font-bold">Available Foods</h2>
+                {/* <h2 className="text-3xl font-bold">Available Foods</h2> */}
+                <div className="flex gap-4 justify-between items-center mb-6">
+                    <h2 className="text-4xl font-bold">Available Foods</h2>
+                    <button
+                        onClick={toggleLayout}
+                        className="btn btn-outline btn-sm bg-orange-400 text-white hover:bg-orange-500 border-none"
+                    >
+                        Change Layout
+                    </button>
+                </div>
                 <div className="flex gap-4">
                     {/* search */}
                     <input
@@ -61,7 +75,12 @@ const AvailableFoods = () => {
             </div>
 
             {/* foods cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+                className={`grid gap-6 ${isThreeColumnLayout
+                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    : "grid-cols-1 sm:grid-cols-2"
+                    }`}
+            >
                 {filteredFoods.length > 0 ? (
                     filteredFoods.map((food) => (
                         <FoodCard key={food._id} food={food}></FoodCard>
