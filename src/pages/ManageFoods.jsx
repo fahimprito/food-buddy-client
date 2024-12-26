@@ -67,6 +67,7 @@ const ManageFoods = () => {
 
         const updatedFood = {
             foodName: e.target.foodName.value,
+            foodImage: e.target.foodImage.value,
             foodQuantity: e.target.foodQuantity.value,
             expiredDate: e.target.expiredDate.value,
             pickupLocation: e.target.pickupLocation.value,
@@ -176,6 +177,16 @@ const ManageFoods = () => {
                                 type="text"
                                 name="foodName"
                                 defaultValue={foodToUpdate.foodName}
+                                required
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="label">Food Image</label>
+                            <input
+                                type="url"
+                                name="foodImage"
+                                defaultValue={foodToUpdate.foodImage}
                                 required
                                 className="input input-bordered w-full"
                             />
