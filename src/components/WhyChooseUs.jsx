@@ -1,6 +1,14 @@
 import { FaHandsHelping, FaRecycle, FaHeartbeat, FaUsers } from "react-icons/fa";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 const WhyChooseUs = () => {
+
+    useEffect(() => {
+        AOS.init();
+    }, []);
+
     const features = [
         {
             icon: <FaHandsHelping size={40} className="text-orange-400" />,
@@ -36,6 +44,7 @@ const WhyChooseUs = () => {
                         <div
                             key={index}
                             className="bg-white shadow-lg p-6 rounded-lg flex flex-col items-center text-center"
+                            data-aos="fade-up" data-aos-duration="1000"
                         >
                             <div className="mb-4">{feature.icon}</div>
                             <h3 className="text-xl font-semibold text-gray-800 mb-2">
