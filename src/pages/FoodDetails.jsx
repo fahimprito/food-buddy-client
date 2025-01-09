@@ -35,7 +35,7 @@ const FoodDetails = () => {
 
         // console.log(requestData);
 
-        fetch("http://localhost:5000/requests", {
+        fetch("https://food-sharing-server-lemon.vercel.app/requests", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const FoodDetails = () => {
                     document.getElementById("request_modal").close();
 
                     // Update the food status to "requested"
-                    fetch(`http://localhost:5000/foods/${_id}`, {
+                    fetch(`https://food-sharing-server-lemon.vercel.app/foods/${_id}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json",

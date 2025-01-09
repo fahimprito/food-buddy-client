@@ -7,7 +7,7 @@ const FeaturedFoods = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:5000/featuredfoods")
+        fetch("https://food-sharing-server-lemon.vercel.app/featuredfoods")
             .then((res) => res.json())
             .then((data) => setFeaturedFoods(data))
             .catch((error) => console.error("Error fetching featured foods:", error));

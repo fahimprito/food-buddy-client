@@ -9,7 +9,7 @@ const ManageFoods = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/myfoods?email=${user.email}`)
+            fetch(`https://food-sharing-server-lemon.vercel.app/myfoods?email=${user.email}`)
                 .then((res) => res.json())
                 .then((data) => setMyFoods(data))
                 .catch((error) => console.error("Error fetching foods:", error));
@@ -28,7 +28,7 @@ const ManageFoods = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/foods/${id}`, {
+                fetch(`https://food-sharing-server-lemon.vercel.app/foods/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
@@ -75,7 +75,7 @@ const ManageFoods = () => {
             notes: e.target.notes.value,
         };
 
-        fetch(`http://localhost:5000/foods/${foodToUpdate._id}`, {
+        fetch(`https://food-sharing-server-lemon.vercel.app/foods/${foodToUpdate._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

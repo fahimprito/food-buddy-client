@@ -9,7 +9,7 @@ const AvailableFoods = () => {
     const [isThreeColumnLayout, setIsThreeColumnLayout] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/foods?sortOrder=${sortOrder}`)
+        fetch(`https://food-sharing-server-lemon.vercel.app/foods?sortOrder=${sortOrder}`)
             .then((res) => res.json())
             .then((data) => {
                 setFoods(data);

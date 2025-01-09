@@ -33,7 +33,7 @@ const AddFood = () => {
         const newFood = { ...formData, donator };
         // console.log(newFood);
 
-        fetch('http://localhost:5000/foods', {
+        fetch('https://food-sharing-server-lemon.vercel.app/foods', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
