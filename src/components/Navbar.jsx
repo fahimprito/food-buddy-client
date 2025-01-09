@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion } from "motion/react"
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.png"
@@ -8,6 +8,26 @@ import AuthContext from "../contexts/AuthContext";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, logOutUser } = useContext(AuthContext);
+    const [navbarBackground, setNavbarBackground] = useState(false);
+    const location = useLocation();
+
+    const homeLocation = location.pathname === '/';
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setNavbarBackground(true);
+            } else {
+                setNavbarBackground(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     // Navbar links
     const navLinks = (
@@ -15,7 +35,7 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/"
-                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
+                    className={({ isActive }) => (isActive ? "font-bold text-orange-400" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
                 >
                     Home
                 </NavLink>
@@ -23,35 +43,41 @@ const Navbar = () => {
             <li>
                 <NavLink
                     to="/availablefoods"
-                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
+                    className={({ isActive }) => (isActive ? "font-bold text-orange-400" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
                 >
                     Available Foods
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to="/addfood"
-                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
-                >
-                    Add Food
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to="/managefood"
-                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
-                >
-                    Manage My Foods
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to="/myfoodrequest"
-                    className={({ isActive }) => (isActive ? " text-orange-400" : "")}
-                >
-                    My Food Request
-                </NavLink>
-            </li>
+            {
+                user && (
+                    <>
+                        <li>
+                            <NavLink
+                                to="/addfood"
+                                className={({ isActive }) => (isActive ? "font-bold text-orange-400" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                            >
+                                Add Food
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/managefood"
+                                className={({ isActive }) => (isActive ? "font-bold text-orange-400" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                            >
+                                Manage My Foods
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/myfoodrequest"
+                                className={({ isActive }) => (isActive ? "font-bold text-orange-400" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                            >
+                                My Food Request
+                            </NavLink>
+                        </li>
+                    </>
+                )
+            }
             {
                 user ? (
                     <>
@@ -72,7 +98,7 @@ const Navbar = () => {
                         <li>
                             <button
                                 onClick={logOutUser}
-                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5 border-none">
                                 Logout
                             </button>
                         </li>
@@ -82,14 +108,14 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to="/login"
-                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5 border-none">
                                 Login
                             </Link>
                         </li>
                         <li>
                             <Link
                                 to="/signup"
-                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5">
+                                className="btn max-sm:btn-sm bg-orange-400 text-white hover:bg-orange-500 font-semibold text-lg px-5 border-none">
                                 Signup
                             </Link>
                         </li>
@@ -100,7 +126,9 @@ const Navbar = () => {
     );
 
     return (
-        <nav className=" px-4 py-3 shadow-md">
+        // <nav className=" px-4 py-3 shadow-md">
+        <nav className={`sticky top-0 w-full z-10 px-4 py-3 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-white lg:bg-transparent"
+            }`}>
             <div className="container mx-auto px-4 flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-2">
