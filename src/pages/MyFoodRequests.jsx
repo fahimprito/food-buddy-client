@@ -60,7 +60,7 @@ const MyFoodRequests = () => {
                         </table>
                     </div>
                 ) : (
-                    <p className="text-center text-gray-500">No food requests found.</p>
+                    <p className="min-h-screen text-center text-gray-500">No food requests found.</p>
                 )
             }
 

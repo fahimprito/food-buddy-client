@@ -6,7 +6,7 @@ const AvailableFoods = () => {
     const [sortOrder, setSortOrder] = useState("");
     const [filteredFoods, setFilteredFoods] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [isThreeColumnLayout, setIsThreeColumnLayout] = useState(true);
+    const [isFourColumnLayout, setIsFourColumnLayout] = useState(true);
 
     useEffect(() => {
         fetch(`https://food-sharing-server-lemon.vercel.app/foods?sortOrder=${sortOrder}`)
@@ -33,7 +33,7 @@ const AvailableFoods = () => {
     };
 
     const toggleLayout = () => {
-        setIsThreeColumnLayout(!isThreeColumnLayout);
+        setIsFourColumnLayout(!isFourColumnLayout);
     };
 
     return (
@@ -76,8 +76,8 @@ const AvailableFoods = () => {
 
             {/* foods cards */}
             <div
-                className={`grid gap-6 ${isThreeColumnLayout
-                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                className={`grid gap-6 ${isFourColumnLayout
+                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
                     : "grid-cols-1 sm:grid-cols-2"
                     }`}
             >
@@ -86,7 +86,7 @@ const AvailableFoods = () => {
                         <FoodCard key={food._id} food={food}></FoodCard>
                     ))
                 ) : (
-                    <p className="text-center col-span-full text-gray-500">
+                    <p className="min-h-screen text-center col-span-full text-gray-500">
                         No foods match your search.
                     </p>
                 )}
